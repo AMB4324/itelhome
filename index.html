@@ -234,18 +234,18 @@
             <div id="date">Tue, Nov 28</div>
         </div>
 
-        <!-- Modern Pill-Style Search Bar -->
-        <form class="search-box" id="searchForm" onsubmit="return handleSearch(event)">
+        <!-- Modern Pill-Style Search Bar (Using a standard div instead of strict form element to avoid blocking) -->
+        <div class="search-box">
             <div class="search-pill">
                 <select id="engineSelect">
                     <option value="https://www.google.com/search?q=">Google</option>
                     <option value="https://duckduckgo.com/?q=">Duck</option>
                     <option value="https://en.wikipedia.org/wiki/Special:Search?search=">Wiki</option>
                 </select>
-                <input type="text" id="searchInput" placeholder="Search web..." required autocomplete="off">
-                <button type="submit" class="search-btn">🔍</button>
+                <input type="text" id="searchInput" placeholder="Search web..." autocomplete="off">
+                <button type="button" class="search-btn" onclick="executeSearch()">🔍</button>
             </div>
-        </form>
+        </div>
 
         <!-- 2x2 Grid Menu -->
         <div class="grid">
@@ -294,8 +294,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        function handleSearch(event) {
-            if (event) event.preventDefault();
+        function executeSearch() {
             const engineSelect = document.getElementById('engineSelect');
             const searchInput = document.getElementById('searchInput');
             
@@ -304,10 +303,16 @@
             
             if (query !== "") {
                 const finalUrl = engineUrl + encodeURIComponent(query);
-                window.location.assign(finalUrl);
+                window.location.href = finalUrl;
             }
-            return false;
         }
+
+        // Allow pressing Enter key inside the input box to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                executeSearch();
+            }
+        });
     </script>
 </body>
 </html>

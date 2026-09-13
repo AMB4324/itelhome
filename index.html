@@ -230,12 +230,12 @@
 
         <!-- Clock & Date Card -->
         <div class="clock-card">
-            <div id="time">10:09 AM</div>
-            <div id="date">Tue, Nov 28</div>
+            <div id="time">Loading...</div>
+            <div id="date">Loading...</div>
         </div>
 
-        <!-- Modern Pill-Style Search Bar (Using a standard div instead of strict form element to avoid blocking) -->
-        <div class="search-box">
+        <!-- Modern Pill-Style Search Bar using Standard Form -->
+        <form class="search-box" onsubmit="executeSearch(event)">
             <div class="search-pill">
                 <select id="engineSelect">
                     <option value="https://www.google.com/search?q=">Google</option>
@@ -243,9 +243,9 @@
                     <option value="https://en.wikipedia.org/wiki/Special:Search?search=">Wiki</option>
                 </select>
                 <input type="text" id="searchInput" placeholder="Search web..." autocomplete="off">
-                <button type="button" class="search-btn" onclick="executeSearch()">🔍</button>
+                <button type="submit" class="search-btn">🔍</button>
             </div>
-        </div>
+        </form>
 
         <!-- 2x2 Grid Menu -->
         <div class="grid">
@@ -280,39 +280,50 @@
 
     <script>
         function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            
             hours = hours % 12;
             hours = hours ? hours : 12; 
-            document.getElementById('time').textContent = `${hours}:${minutes} ${ampm}`;
-
-            const options = { weekday: 'short', month: 'short', day: 'numeric' };
-            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        function executeSearch() {
-            const engineSelect = document.getElementById('engineSelect');
-            const searchInput = document.getElementById('searchInput');
             
-            const engineUrl = engineSelect.value;
-            const query = searchInput.value.trim();
+            var minutesFormatted = minutes < 10 ? '0' + minutes : minutes;
+            
+            var timeString = hours + ':' + minutesFormatted + ' ' + ampm;
+            document.getElementById('time').textContent = timeString;
+
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            var dayName = days[now.getDay()];
+            var monthName = months[now.getMonth()];
+            var dateNum = now.getDate();
+            
+            var dateString = dayName + ', ' + monthName + ' ' + dateNum;
+            document.getElementById('date').textContent = dateString;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        function executeSearch(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
+            var engineSelect = document.getElementById('engineSelect');
+            var searchInput = document.getElementById('searchInput');
+            
+            var engineUrl = engineSelect.value;
+            var query = searchInput.value.trim();
             
             if (query !== "") {
-                const finalUrl = engineUrl + encodeURIComponent(query);
+                var finalUrl = engineUrl + encodeURIComponent(query);
                 window.location.href = finalUrl;
             }
+            return false;
         }
-
-        // Allow pressing Enter key inside the input box to trigger search
-        document.getElementById('searchInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                executeSearch();
-            }
-        });
     </script>
 </body>
 </html>

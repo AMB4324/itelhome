@@ -234,7 +234,7 @@
         </div>
 
         <!-- Modern Pill-Style Search Bar -->
-        <form class="search-box" id="searchForm" onsubmit="handleSearch(event)">
+        <form class="search-box" id="searchForm" onsubmit="return handleSearch(event)">
             <div class="search-pill">
                 <select id="engineSelect">
                     <option value="https://www.google.com/search?q=">Google</option>
@@ -294,12 +294,18 @@
         updateClock();
 
         function handleSearch(event) {
-            event.preventDefault();
-            const engine = document.getElementById('engineSelect').value;
-            const query = document.getElementById('searchInput').value.trim();
-            if (query) {
-                window.location.href = engine + encodeURIComponent(query);
+            if (event) event.preventDefault();
+            const engineSelect = document.getElementById('engineSelect');
+            const searchInput = document.getElementById('searchInput');
+            
+            const engineUrl = engineSelect.value;
+            const query = searchInput.value.trim();
+            
+            if (query !== "") {
+                const finalUrl = engineUrl + encodeURIComponent(query);
+                window.location.assign(finalUrl);
             }
+            return false;
         }
     </script>
 </body>

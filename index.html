@@ -44,13 +44,17 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .logo-box img {
-            height: 22px;
+            height: 20px;
+            max-width: 80px;
+            width: auto;
             object-fit: contain;
+            display: block;
         }
         .logo-divider {
             width: 1px;
-            height: 20px;
+            height: 18px;
             background-color: #d1d5db;
+            flex-shrink: 0;
         }
         /* Modern Clock & Date Card */
         .clock-card {
@@ -134,6 +138,7 @@
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3);
+            flex-shrink: 0;
             transition: background 0.1s;
         }
         .search-btn:active {
@@ -160,6 +165,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 4px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
             transition: transform 0.1s ease, background 0.1s ease;
@@ -173,7 +179,10 @@
         .card img {
             width: 18px;
             height: 18px;
+            max-width: 18px;
+            max-height: 18px;
             object-fit: contain;
+            display: block;
         }
         /* Modern Footer */
         .footer {
@@ -196,13 +205,17 @@
             gap: 6px;
         }
         .footer-logos img {
-            height: 16px;
+            height: 14px;
+            max-width: 60px;
+            width: auto;
             object-fit: contain;
+            display: block;
         }
         .footer-divider {
             width: 1px;
-            height: 14px;
+            height: 12px;
             background-color: #d1d5db;
+            flex-shrink: 0;
         }
         .footer-text {
             font-size: 7.5px;

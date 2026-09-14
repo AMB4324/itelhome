@@ -13,10 +13,10 @@
             -webkit-tap-highlight-color: transparent;
         }
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            background: #f5f7fa;
             color: #1f2937;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding: 4px;
+            font-family: sans-serif;
+            padding: 3px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,93 +24,77 @@
         }
         .container {
             width: 100%;
-            max-width: 156px; /* Shrinks container so everything fits the screen perfectly */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+            max-width: 140px;
+            text-align: center;
         }
-        /* Locked Proportional Brand Box */
+        /* Dual Brand Logo Card */
         .logo-box {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            padding: 4px 6px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            background: #ffffff;
+            padding: 3px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            border: 1px solid #d1d5db;
         }
         .brand-logo {
-            height: 14px;
-            width: 55px;
+            display: inline-block;
+            height: 12px;
+            width: 45px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            vertical-align: middle;
         }
-        .logo-itel {
-            background-image: url('itel.png');
-        }
-        .logo-am {
-            background-image: url('amiosfix.png');
-        }
+        .logo-itel { background-image: url('itel.png'); }
+        .logo-am { background-image: url('amiosfix.png'); }
         .logo-divider {
+            display: inline-block;
             width: 1px;
-            height: 12px;
+            height: 10px;
             background-color: #d1d5db;
+            vertical-align: middle;
+            margin: 0 4px;
         }
         /* Modern Clock & Date Card */
         .clock-card {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            padding: 4px;
-            border-radius: 6px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            background: #ffffff;
+            padding: 3px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            border: 1px solid #d1d5db;
         }
         #time {
-            font-size: 15px;
-            font-weight: 800;
+            font-size: 13px;
+            font-weight: bold;
             color: #111827;
-            letter-spacing: -0.5px;
         }
         #date {
-            font-size: 7px;
+            font-size: 6px;
             color: #4b5563;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 1px;
-            font-weight: 600;
+            font-weight: bold;
         }
-        /* Sleek Modern Pill-Style Search Bar */
+        /* Search Bar */
         .search-box {
             width: 100%;
+            margin-bottom: 3px;
         }
         .search-pill {
             display: flex;
             align-items: center;
             background: #ffffff;
-            border: 1.2px solid #3b82f6;
-            border-radius: 14px;
-            padding: 2px 3px 2px 5px;
-            box-shadow: 0 1px 6px rgba(59, 130, 246, 0.12);
+            border: 1px solid #3b82f6;
+            border-radius: 10px;
+            padding: 2px 4px;
         }
         select {
             background: transparent;
             border: none;
             color: #2563eb;
-            font-size: 7px;
-            font-weight: 800;
+            font-size: 6px;
+            font-weight: bold;
             outline: none;
-            cursor: pointer;
-            padding-right: 2px;
-            border-right: 1px solid #e5e7eb;
-            margin-right: 2px;
         }
         input[type="text"] {
             flex: 1;
@@ -118,103 +102,90 @@
             background: transparent;
             color: #1f2937;
             border: none;
-            font-size: 8px;
+            font-size: 7px;
             outline: none;
             padding: 2px;
-            font-weight: 500;
-        }
-        input[type="text"]::placeholder {
-            color: #9ca3af;
         }
         .search-btn {
             background: #3b82f6;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 7px;
+            width: 14px;
+            height: 14px;
+            font-size: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            flex-shrink: 0;
         }
-        /* 2x2 Grid Menu Cards - Forced 2 columns side-by-side */
+        /* Side-by-Side Bookmarks using table-cell / inline-block layout for old browsers */
         .grid {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4px;
+            font-size: 0; /* fixes inline-block spacing */
+            margin-bottom: 3px;
         }
         .card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 6px;
-            padding: 5px 2px;
+            display: inline-block;
+            width: 48%;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 4px 2px;
             text-align: center;
             text-decoration: none;
             color: #374151;
-            font-size: 8px;
-            font-weight: 700;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+            font-size: 7px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            vertical-align: top;
         }
-        .card:active {
-            transform: scale(0.96);
-            background: #eff6ff;
-            color: #2563eb;
+        .card:nth-child(odd) {
+            margin-right: 4%; /* creates gap between the two columns */
         }
         .card-icon {
-            width: 12px;
-            height: 12px;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            vertical-align: middle;
+            margin-right: 2px;
         }
         /* Modern Footer */
         .footer {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 6px;
-            padding: 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-        }
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 3px;
+            text-align: center;
         }
         .footer-logo-item {
-            height: 12px;
-            width: 40px;
+            display: inline-block;
+            height: 10px;
+            width: 35px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            vertical-align: middle;
         }
         .footer-divider {
+            display: inline-block;
             width: 1px;
-            height: 10px;
+            height: 8px;
             background-color: #d1d5db;
+            vertical-align: middle;
+            margin: 0 4px;
         }
         .footer-text {
-            font-size: 6px;
-            font-weight: 700;
+            font-size: 5px;
+            font-weight: bold;
             color: #6b7280;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
-            text-align: center;
+            display: block;
+            margin-top: 1px;
         }
     </style>
 </head>
@@ -234,20 +205,17 @@
             <div id="date">Loading...</div>
         </div>
 
-        <!-- Google Search Form using working client parameters -->
+        <!-- Google Search Form -->
         <form class="search-box" action="https://www.google.com/search" method="GET">
             <input type="hidden" name="client" value="ms-opera-mini">
             <input type="hidden" name="gws_rd" value="ssl">
             <div class="search-pill">
-                <select id="engineSelect" disabled style="opacity: 0.8;">
-                    <option value="google">Google</option>
-                </select>
                 <input type="text" name="q" id="searchInput" placeholder="Search Google..." autocomplete="off">
                 <button type="submit" class="search-btn">🔍</button>
             </div>
         </form>
 
-        <!-- 2x2 Grid Menu (Two items side-by-side per row) -->
+        <!-- 2 Bookmarks Per Row Layout -->
         <div class="grid">
             <a href="https://www.google.com" class="card">
                 <div class="card-icon" style="background-image: url('google.png');"></div>
@@ -267,14 +235,12 @@
             </a>
         </div>
 
-        <!-- Footer with Both Logos & Attribution -->
+        <!-- Footer -->
         <div class="footer">
-            <div class="footer-logos">
-                <div class="footer-logo-item logo-itel"></div>
-                <div class="footer-divider"></div>
-                <div class="footer-logo-item logo-am"></div>
-            </div>
-            <span class="footer-text">Powered by the AM iOS Fix</span>
+            <div class="footer-logo-item logo-itel"></div>
+            <div class="footer-divider"></div>
+            <div class="footer-logo-item logo-am"></div>
+            <span class="footer-text">AM iOS Fix</span>
         </div>
     </div>
 
@@ -284,26 +250,15 @@
             var hours = now.getHours();
             var minutes = now.getMinutes();
             var ampm = hours >= 12 ? 'PM' : 'AM';
-            
             hours = hours % 12;
             hours = hours ? hours : 12; 
-            
             var minutesFormatted = minutes < 10 ? '0' + minutes : minutes;
-            
-            var timeString = hours + ':' + minutesFormatted + ' ' + ampm;
-            document.getElementById('time').textContent = timeString;
+            document.getElementById('time').textContent = hours + ':' + minutesFormatted + ' ' + ampm;
 
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            
-            var dayName = days[now.getDay()];
-            var monthName = months[now.getMonth()];
-            var dateNum = now.getDate();
-            
-            var dateString = dayName + ', ' + monthName + ' ' + dateNum;
-            document.getElementById('date').textContent = dateString;
+            document.getElementById('date').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
         }
-
         updateClock();
         setInterval(updateClock, 1000);
     </script>

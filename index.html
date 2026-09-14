@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>itel Home</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
         }
         body {
             background: #f5f7fa;
@@ -19,7 +18,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
         .container {
             width: 100%;
@@ -48,26 +46,12 @@
             border-radius: 6px;
             margin-bottom: 4px;
             border: 1px solid #d1d5db;
-            font-size: 0;
         }
-        .brand-logo {
-            display: inline-block;
-            height: 20px;
-            width: 55px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            vertical-align: middle;
-        }
-        .logo-itel { background-image: url('itel.png'); }
-        .logo-am { background-image: url('amiosfix.png'); }
-        .logo-divider {
-            display: inline-block;
-            width: 1px;
-            height: 16px;
-            background-color: #d1d5db;
-            vertical-align: middle;
-            margin: 0 4px;
+        .brand-text {
+            font-size: 9px;
+            font-weight: bold;
+            color: #2563eb;
+            text-transform: uppercase;
         }
         .clock-card {
             width: 100%;
@@ -78,12 +62,12 @@
             border: 1px solid #d1d5db;
         }
         #time {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #111827;
         }
         #date {
-            font-size: 7px;
+            font-size: 6px;
             color: #4b5563;
             text-transform: uppercase;
             font-weight: bold;
@@ -100,17 +84,13 @@
             text-align: center;
         }
         input[type="text"], input[type="password"] {
-            width: 72%;
+            width: 70%;
             background: transparent;
             color: #1f2937;
             border: none;
             font-size: 8px;
             outline: none;
             padding: 2px;
-            vertical-align: middle;
-        }
-        input::placeholder {
-            color: #9ca3af;
         }
         .search-btn {
             background: #3b82f6;
@@ -121,40 +101,24 @@
             font-size: 7px;
             font-weight: bold;
             cursor: pointer;
-            vertical-align: middle;
         }
         .grid {
             width: 100%;
-            font-size: 0;
             margin-bottom: 4px;
         }
         .card {
-            display: inline-block;
-            width: 48%;
+            display: block;
+            width: 100%;
             background: #ffffff;
             border: 1px solid #d1d5db;
             border-radius: 6px;
-            padding: 6px 2px;
+            padding: 5px;
             text-align: center;
             text-decoration: none;
             color: #374151;
             font-size: 8px;
             font-weight: bold;
-            margin-bottom: 4px;
-            vertical-align: top;
-        }
-        .card:nth-child(odd) {
-            margin-right: 4%;
-        }
-        .card-icon {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            vertical-align: middle;
-            margin-right: 3px;
+            margin-bottom: 3px;
         }
         .footer {
             width: 100%;
@@ -163,13 +127,10 @@
             border-radius: 6px;
             padding: 4px;
             text-align: center;
-        }
-        .footer-text {
             font-size: 6px;
             font-weight: bold;
             color: #6b7280;
             text-transform: uppercase;
-            display: block;
         }
         .panel-card {
             width: 100%;
@@ -187,14 +148,6 @@
             margin-bottom: 4px;
             text-transform: uppercase;
         }
-        .phone-img {
-            width: 100%;
-            max-height: 75px;
-            object-fit: contain;
-            border-radius: 4px;
-            margin-bottom: 3px;
-            border: 1px solid #e5e7eb;
-        }
         .phone-details {
             font-size: 7px;
             color: #4b5563;
@@ -204,9 +157,6 @@
             padding: 4px;
             border-radius: 4px;
             margin-bottom: 4px;
-        }
-        .phone-details b {
-            color: #1f2937;
         }
         .action-btn {
             width: 100%;
@@ -229,7 +179,6 @@
             font-size: 7px;
             color: #1f2937;
             margin-bottom: 4px;
-            outline: none;
         }
         .auth-error {
             font-size: 6px;
@@ -251,76 +200,61 @@
     <div class="container">
         
         <!-- AUTH VIEW -->
-        <div id="authView" style="display: none;">
+        <div id="authView">
             <div class="logo-box">
-                <div class="brand-logo logo-itel"></div>
-                <div class="logo-divider"></div>
-                <div class="brand-logo logo-am"></div>
+                <div class="brand-text">itel &bull; AM iOS Fix</div>
             </div>
             <div class="panel-card">
                 <div class="panel-title" id="authTitle">Login</div>
-                <div class="auth-error" id="authError">Invalid details</div>
+                <div class="auth-error" id="authError">Fill all fields</div>
                 <input type="text" id="authUsername" class="auth-input" placeholder="Username">
                 <input type="password" id="authPassword" class="auth-input" placeholder="Password">
                 <button onclick="handleAuth()" class="action-btn" id="authSubmitBtn">Login</button>
-                <span class="auth-switch" onclick="toggleAuthMode()" id="authSwitchText">Need an account? Sign up</span>
+                <span class="auth-switch" onclick="toggleAuthMode()" id="authSwitchText">Create Account</span>
             </div>
         </div>
 
         <!-- HOME VIEW -->
-        <div id="homeView" style="display: none;">
+        <div id="homeView" style="display:none;">
             <div class="top-bar">
                 <button onclick="showAbout()" class="settings-btn">⚙️ Settings</button>
             </div>
 
             <div class="logo-box">
-                <div class="brand-logo logo-itel"></div>
-                <div class="logo-divider"></div>
-                <div class="brand-logo logo-am"></div>
+                <div class="brand-text">itel &bull; AM iOS Fix</div>
             </div>
 
             <div class="clock-card">
-                <div id="time">Loading...</div>
+                <div id="time">00:00 AM</div>
                 <div id="date">Loading...</div>
             </div>
 
             <form class="search-box" action="https://www.google.com/search" method="GET">
-                <input type="hidden" name="client" value="ms-opera-mini">
-                <input type="hidden" name="gws_rd" value="ssl">
                 <div class="search-pill">
-                    <input type="text" name="q" id="searchInput" placeholder="Search Google..." autocomplete="off">
+                    <input type="text" name="q" placeholder="Search Google...">
                     <button type="submit" class="search-btn">Go</button>
                 </div>
             </form>
 
             <div class="grid">
-                <a href="https://www.google.com" class="card"><span>Google</span></a>
-                <a href="https://en.m.wikipedia.org" class="card"><span>Wikipedia</span></a>
-                <a href="https://github.com" class="card"><span>GitHub</span></a>
-                <a href="https://lite.cnn.com" class="card"><span>Lite News</span></a>
+                <a href="https://www.google.com" class="card">Google</a>
+                <a href="https://en.m.wikipedia.org" class="card">Wikipedia</a>
+                <a href="https://github.com" class="card">GitHub</a>
             </div>
 
-            <div class="footer">
-                <span class="footer-text">AM iOS Fix</span>
-            </div>
+            <div class="footer">AM iOS Fix</div>
         </div>
 
-        <!-- ABOUT PHONE VIEW -->
-        <div id="aboutView" style="display: none;">
+        <!-- ABOUT VIEW -->
+        <div id="aboutView" style="display:none;">
             <div class="logo-box">
-                <div class="brand-logo logo-itel"></div>
-                <div class="logo-divider"></div>
-                <div class="brand-logo logo-am"></div>
+                <div class="brand-text">itel &bull; AM iOS Fix</div>
             </div>
-
             <div class="panel-card">
-                <div class="panel-title">About Phone</div>
-                <img src="IMG_0009.png" class="phone-img" alt="itel Phone" onerror="this.style.display='none';">
+                <div class="panel-title">Settings</div>
                 <div class="phone-details">
-                    <b>Model:</b> itel Feature Phone<br>
-                    <b>User:</b> <span id="loggedUserDisplay"></span><br>
-                    <b>System:</b> AM iOS Fix Portal<br>
-                    <b>Status:</b> Fully Optimized
+                    <b>User:</b> <span id="loggedUserDisplay">Guest</span><br>
+                    <b>Portal:</b> Active
                 </div>
                 <button onclick="showHome()" class="action-btn">Back</button>
                 <button onclick="logout()" class="action-btn" style="background: #ef4444;">Logout</button>
@@ -330,30 +264,30 @@
     </div>
 
     <script>
+        // Simple clock
         function updateClock() {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; 
-            var minutesFormatted = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('time').textContent = hours + ':' + minutesFormatted + ' ' + ampm;
-
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            h = h ? h : 12;
+            m = m < 10 ? '0' + m : m;
+            document.getElementById('time').textContent = h + ':' + m + ' ' + ampm;
+            
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            document.getElementById('date').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
+            document.getElementById('date').textContent = days[d.getDay()] + ' ' + d.getDate();
         }
         updateClock();
         setInterval(updateClock, 1000);
 
-        let isSignupMode = false;
+        var isSignup = false;
 
         function checkAuth() {
             try {
-                const currentUser = localStorage.getItem('itel_current_user');
-                if (currentUser) {
-                    document.getElementById('loggedUserDisplay').textContent = currentUser;
+                var user = localStorage.getItem('itel_user');
+                if (user) {
+                    document.getElementById('loggedUserDisplay').textContent = user;
                     document.getElementById('authView').style.display = 'none';
                     document.getElementById('homeView').style.display = 'block';
                     document.getElementById('aboutView').style.display = 'none';
@@ -362,66 +296,43 @@
                     document.getElementById('homeView').style.display = 'none';
                     document.getElementById('aboutView').style.display = 'none';
                 }
-            } catch (e) {
-                // Fallback if localStorage is restricted
+            } catch(e) {
+                // Failsafe if local storage throws security blocks on the device browser
                 document.getElementById('authView').style.display = 'none';
                 document.getElementById('homeView').style.display = 'block';
             }
         }
 
         function toggleAuthMode() {
-            isSignupMode = !isSignupMode;
-            document.getElementById('authTitle').textContent = isSignupMode ? 'Sign Up' : 'Login';
-            document.getElementById('authSubmitBtn').textContent = isSignupMode ? 'Create Account' : 'Login';
-            document.getElementById('authSwitchText').textContent = isSignupMode ? 'Already have an account? Login' : 'Need an account? Sign up';
-            document.getElementById('authError').style.display = 'none';
+            isSignup = !isSignup;
+            document.getElementById('authTitle').textContent = isSignup ? 'Sign Up' : 'Login';
+            document.getElementById('authSubmitBtn').textContent = isSignup ? 'Register' : 'Login';
+            document.getElementById('authSwitchText').textContent = isSignup ? 'Switch to Login' : 'Create Account';
         }
 
         function handleAuth() {
-            const user = document.getElementById('authUsername').value.trim();
-            const pass = document.getElementById('authPassword').value.trim();
-            const errorEl = document.getElementById('authError');
+            var u = document.getElementById('authUsername').value;
+            var p = document.getElementById('authPassword').value;
+            var err = document.getElementById('authError');
 
-            if (!user || !pass) {
-                errorEl.textContent = 'Please fill all fields';
-                errorEl.style.display = 'block';
+            if (!u || !p) {
+                err.style.display = 'block';
                 return;
             }
 
             try {
-                let users = JSON.parse(localStorage.getItem('itel_users') || '{}');
-
-                if (isSignupMode) {
-                    if (users[user]) {
-                        errorEl.textContent = 'Username already exists';
-                        errorEl.style.display = 'block';
-                        return;
-                    }
-                    users[user] = pass;
-                    localStorage.setItem('itel_users', JSON.stringify(users));
-                    localStorage.setItem('itel_current_user', user);
-                    checkAuth();
-                } else {
-                    if (users[user] && users[user] === pass) {
-                        localStorage.setItem('itel_current_user', user);
-                        checkAuth();
-                    } else {
-                        errorEl.textContent = 'Invalid username or password';
-                        errorEl.style.display = 'block';
-                    }
-                }
-            } catch (e) {
-                errorEl.textContent = 'Storage error';
-                errorEl.style.display = 'block';
+                localStorage.setItem('itel_user', u);
+                checkAuth();
+            } catch(e) {
+                err.textContent = 'Storage blocked';
+                err.style.display = 'block';
             }
         }
 
         function logout() {
             try {
-                localStorage.removeItem('itel_current_user');
-            } catch (e) {}
-            document.getElementById('authUsername').value = '';
-            document.getElementById('authPassword').value = '';
+                localStorage.removeItem('itel_user');
+            } catch(e) {}
             checkAuth();
         }
 
@@ -435,6 +346,7 @@
             document.getElementById('homeView').style.display = 'block';
         }
 
+        // Run immediately
         checkAuth();
     </script>
 </body>

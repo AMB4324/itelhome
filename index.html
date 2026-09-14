@@ -16,7 +16,7 @@
             background: #f5f7fa;
             color: #1f2937;
             font-family: sans-serif;
-            padding: 3px;
+            padding: 4px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,22 +24,22 @@
         }
         .container {
             width: 100%;
-            max-width: 140px;
+            max-width: 150px;
             text-align: center;
         }
-        /* Dual Brand Logo Card */
+        /* Brand Box - Logos made clearly larger */
         .logo-box {
             width: 100%;
             background: #ffffff;
-            padding: 3px;
-            border-radius: 4px;
-            margin-bottom: 3px;
+            padding: 6px 4px;
+            border-radius: 6px;
+            margin-bottom: 4px;
             border: 1px solid #d1d5db;
         }
         .brand-logo {
             display: inline-block;
-            height: 12px;
-            width: 45px;
+            height: 22px; /* Made larger than text */
+            width: 58px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -50,122 +50,114 @@
         .logo-divider {
             display: inline-block;
             width: 1px;
-            height: 10px;
+            height: 18px;
             background-color: #d1d5db;
             vertical-align: middle;
-            margin: 0 4px;
+            margin: 0 6px;
         }
-        /* Modern Clock & Date Card */
+        /* Clock & Date Card */
         .clock-card {
             width: 100%;
             background: #ffffff;
-            padding: 3px;
-            border-radius: 4px;
-            margin-bottom: 3px;
+            padding: 4px;
+            border-radius: 6px;
+            margin-bottom: 4px;
             border: 1px solid #d1d5db;
         }
         #time {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             color: #111827;
         }
         #date {
-            font-size: 6px;
+            font-size: 7px;
             color: #4b5563;
             text-transform: uppercase;
             font-weight: bold;
         }
-        /* Search Bar */
+        /* Clean Search Bar (Fixed suspicious/broken look) */
         .search-box {
             width: 100%;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .search-pill {
-            display: flex;
-            align-items: center;
             background: #ffffff;
-            border: 1px solid #3b82f6;
-            border-radius: 10px;
-            padding: 2px 4px;
-        }
-        select {
-            background: transparent;
-            border: none;
-            color: #2563eb;
-            font-size: 6px;
-            font-weight: bold;
-            outline: none;
+            border: 1.5px solid #3b82f6;
+            border-radius: 8px;
+            padding: 3px;
+            text-align: center;
         }
         input[type="text"] {
-            flex: 1;
-            width: 100%;
+            width: 72%;
             background: transparent;
             color: #1f2937;
             border: none;
-            font-size: 7px;
+            font-size: 8px;
             outline: none;
             padding: 2px;
+            vertical-align: middle;
+        }
+        input[type="text"]::placeholder {
+            color: #9ca3af;
         }
         .search-btn {
             background: #3b82f6;
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 14px;
-            height: 14px;
-            font-size: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 4px;
+            padding: 3px 5px;
+            font-size: 7px;
+            font-weight: bold;
             cursor: pointer;
+            vertical-align: middle;
         }
-        /* Side-by-Side Bookmarks using table-cell / inline-block layout for old browsers */
+        /* 2 Bookmarks Per Row Layout */
         .grid {
             width: 100%;
-            font-size: 0; /* fixes inline-block spacing */
-            margin-bottom: 3px;
+            font-size: 0;
+            margin-bottom: 4px;
         }
         .card {
             display: inline-block;
             width: 48%;
             background: #ffffff;
             border: 1px solid #d1d5db;
-            border-radius: 4px;
-            padding: 4px 2px;
+            border-radius: 6px;
+            padding: 6px 2px;
             text-align: center;
             text-decoration: none;
             color: #374151;
-            font-size: 7px;
+            font-size: 8px;
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             vertical-align: top;
         }
         .card:nth-child(odd) {
-            margin-right: 4%; /* creates gap between the two columns */
+            margin-right: 4%;
         }
         .card-icon {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             vertical-align: middle;
-            margin-right: 2px;
+            margin-right: 3px;
         }
-        /* Modern Footer */
+        /* Footer */
         .footer {
             width: 100%;
             background: #ffffff;
             border: 1px solid #d1d5db;
-            border-radius: 4px;
-            padding: 3px;
+            border-radius: 6px;
+            padding: 4px;
             text-align: center;
         }
         .footer-logo-item {
             display: inline-block;
-            height: 10px;
-            width: 35px;
+            height: 14px;
+            width: 40px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -174,25 +166,25 @@
         .footer-divider {
             display: inline-block;
             width: 1px;
-            height: 8px;
+            height: 12px;
             background-color: #d1d5db;
             vertical-align: middle;
             margin: 0 4px;
         }
         .footer-text {
-            font-size: 5px;
+            font-size: 6px;
             font-weight: bold;
             color: #6b7280;
             text-transform: uppercase;
             display: block;
-            margin-top: 1px;
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Dual Brand Logo Card -->
+        <!-- Dual Brand Logo Card (Now larger than text) -->
         <div class="logo-box">
             <div class="brand-logo logo-itel"></div>
             <div class="logo-divider"></div>
@@ -205,13 +197,13 @@
             <div id="date">Loading...</div>
         </div>
 
-        <!-- Google Search Form -->
+        <!-- Clean Google Search Form -->
         <form class="search-box" action="https://www.google.com/search" method="GET">
             <input type="hidden" name="client" value="ms-opera-mini">
             <input type="hidden" name="gws_rd" value="ssl">
             <div class="search-pill">
                 <input type="text" name="q" id="searchInput" placeholder="Search Google..." autocomplete="off">
-                <button type="submit" class="search-btn">🔍</button>
+                <button type="submit" class="search-btn">Go</button>
             </div>
         </form>
 

@@ -234,15 +234,13 @@
             <div id="date">Loading...</div>
         </div>
 
-        <!-- Modern Pill-Style Search Bar using Standard Form -->
-        <form class="search-box" onsubmit="executeSearch(event)">
+        <!-- Native Google Search Form -->
+        <form class="search-box" action="https://www.google.com/search" method="GET">
             <div class="search-pill">
-                <select id="engineSelect">
-                    <option value="https://www.google.com/search?q=">Google</option>
-                    <option value="https://duckduckgo.com/?q=">Duck</option>
-                    <option value="https://en.wikipedia.org/wiki/Special:Search?search=">Wiki</option>
+                <select id="engineSelect" disabled style="opacity: 0.8;">
+                    <option value="google">Google</option>
                 </select>
-                <input type="text" id="searchInput" placeholder="Search web..." autocomplete="off">
+                <input type="text" name="q" id="searchInput" placeholder="Search Google..." autocomplete="off">
                 <button type="submit" class="search-btn">🔍</button>
             </div>
         </form>
@@ -306,24 +304,6 @@
 
         updateClock();
         setInterval(updateClock, 1000);
-
-        function executeSearch(event) {
-            if (event) {
-                event.preventDefault();
-            }
-            
-            var engineSelect = document.getElementById('engineSelect');
-            var searchInput = document.getElementById('searchInput');
-            
-            var engineUrl = engineSelect.value;
-            var query = searchInput.value.trim();
-            
-            if (query !== "") {
-                var finalUrl = engineUrl + encodeURIComponent(query);
-                window.location.href = finalUrl;
-            }
-            return false;
-        }
     </script>
 </body>
 </html>

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>itel Home</title>
-    <link rel="icon" type="image/png" href="itel.png">
     <style>
         * {
             box-sizing: border-box;
@@ -27,7 +26,6 @@
             max-width: 150px;
             text-align: center;
         }
-        /* Top Navigation Bar for Settings Button */
         .top-bar {
             width: 100%;
             text-align: left;
@@ -43,7 +41,6 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        /* Brand Box - Logos larger than text */
         .logo-box {
             width: 100%;
             background: #ffffff;
@@ -51,11 +48,12 @@
             border-radius: 6px;
             margin-bottom: 4px;
             border: 1px solid #d1d5db;
+            font-size: 0;
         }
         .brand-logo {
             display: inline-block;
-            height: 22px;
-            width: 58px;
+            height: 20px;
+            width: 55px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -66,12 +64,11 @@
         .logo-divider {
             display: inline-block;
             width: 1px;
-            height: 18px;
+            height: 16px;
             background-color: #d1d5db;
             vertical-align: middle;
-            margin: 0 6px;
+            margin: 0 4px;
         }
-        /* Clock & Date Card */
         .clock-card {
             width: 100%;
             background: #ffffff;
@@ -91,7 +88,6 @@
             text-transform: uppercase;
             font-weight: bold;
         }
-        /* Clean Search Bar */
         .search-box {
             width: 100%;
             margin-bottom: 4px;
@@ -127,7 +123,6 @@
             cursor: pointer;
             vertical-align: middle;
         }
-        /* 2 Bookmarks Per Row Layout */
         .grid {
             width: 100%;
             font-size: 0;
@@ -161,7 +156,6 @@
             vertical-align: middle;
             margin-right: 3px;
         }
-        /* Footer */
         .footer {
             width: 100%;
             background: #ffffff;
@@ -170,33 +164,13 @@
             padding: 4px;
             text-align: center;
         }
-        .footer-logo-item {
-            display: inline-block;
-            height: 14px;
-            width: 40px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            vertical-align: middle;
-        }
-        .footer-divider {
-            display: inline-block;
-            width: 1px;
-            height: 12px;
-            background-color: #d1d5db;
-            vertical-align: middle;
-            margin: 0 4px;
-        }
         .footer-text {
             font-size: 6px;
             font-weight: bold;
             color: #6b7280;
             text-transform: uppercase;
             display: block;
-            margin-top: 2px;
         }
-
-        /* About & Auth Views */
         .panel-card {
             width: 100%;
             background: #ffffff;
@@ -276,7 +250,7 @@
 
     <div class="container">
         
-        <!-- AUTH VIEW (Login / Signup) -->
+        <!-- AUTH VIEW -->
         <div id="authView" style="display: none;">
             <div class="logo-box">
                 <div class="brand-logo logo-itel"></div>
@@ -295,25 +269,21 @@
 
         <!-- HOME VIEW -->
         <div id="homeView" style="display: none;">
-            <!-- Top Bar with Settings Button -->
             <div class="top-bar">
                 <button onclick="showAbout()" class="settings-btn">⚙️ Settings</button>
             </div>
 
-            <!-- Dual Brand Logo Card -->
             <div class="logo-box">
                 <div class="brand-logo logo-itel"></div>
                 <div class="logo-divider"></div>
                 <div class="brand-logo logo-am"></div>
             </div>
 
-            <!-- Clock & Date Card -->
             <div class="clock-card">
                 <div id="time">Loading...</div>
                 <div id="date">Loading...</div>
             </div>
 
-            <!-- Clean Google Search Form -->
             <form class="search-box" action="https://www.google.com/search" method="GET">
                 <input type="hidden" name="client" value="ms-opera-mini">
                 <input type="hidden" name="gws_rd" value="ssl">
@@ -323,36 +293,19 @@
                 </div>
             </form>
 
-            <!-- 2 Bookmarks Per Row Layout -->
             <div class="grid">
-                <a href="https://www.google.com" class="card">
-                    <div class="card-icon" style="background-image: url('google.png');"></div>
-                    <span>Google</span>
-                </a>
-                <a href="https://en.m.wikipedia.org" class="card">
-                    <div class="card-icon" style="background-image: url('wikipedia.png');"></div>
-                    <span>Wikipedia</span>
-                </a>
-                <a href="https://github.com" class="card">
-                    <div class="card-icon" style="background-image: url('github.png');"></div>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://lite.cnn.com" class="card">
-                    <div class="card-icon" style="background-image: url('news.png');"></div>
-                    <span>Lite News</span>
-                </a>
+                <a href="https://www.google.com" class="card"><span>Google</span></a>
+                <a href="https://en.m.wikipedia.org" class="card"><span>Wikipedia</span></a>
+                <a href="https://github.com" class="card"><span>GitHub</span></a>
+                <a href="https://lite.cnn.com" class="card"><span>Lite News</span></a>
             </div>
 
-            <!-- Footer -->
             <div class="footer">
-                <div class="footer-logo-item logo-itel"></div>
-                <div class="footer-divider"></div>
-                <div class="footer-logo-item logo-am"></div>
                 <span class="footer-text">AM iOS Fix</span>
             </div>
         </div>
 
-        <!-- ABOUT PHONE VIEW (Hidden by default) -->
+        <!-- ABOUT PHONE VIEW -->
         <div id="aboutView" style="display: none;">
             <div class="logo-box">
                 <div class="brand-logo logo-itel"></div>
@@ -362,7 +315,7 @@
 
             <div class="panel-card">
                 <div class="panel-title">About Phone</div>
-                <img src="IMG_0009.png" class="phone-img" alt="itel Phone">
+                <img src="IMG_0009.png" class="phone-img" alt="itel Phone" onerror="this.style.display='none';">
                 <div class="phone-details">
                     <b>Model:</b> itel Feature Phone<br>
                     <b>User:</b> <span id="loggedUserDisplay"></span><br>
@@ -377,7 +330,6 @@
     </div>
 
     <script>
-        // Clock Script
         function updateClock() {
             var now = new Date();
             var hours = now.getHours();
@@ -395,20 +347,25 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Auth Logic via localStorage
         let isSignupMode = false;
 
         function checkAuth() {
-            const currentUser = localStorage.getItem('itel_current_user');
-            if (currentUser) {
-                document.getElementById('loggedUserDisplay').textContent = currentUser;
+            try {
+                const currentUser = localStorage.getItem('itel_current_user');
+                if (currentUser) {
+                    document.getElementById('loggedUserDisplay').textContent = currentUser;
+                    document.getElementById('authView').style.display = 'none';
+                    document.getElementById('homeView').style.display = 'block';
+                    document.getElementById('aboutView').style.display = 'none';
+                } else {
+                    document.getElementById('authView').style.display = 'block';
+                    document.getElementById('homeView').style.display = 'none';
+                    document.getElementById('aboutView').style.display = 'none';
+                }
+            } catch (e) {
+                // Fallback if localStorage is restricted
                 document.getElementById('authView').style.display = 'none';
                 document.getElementById('homeView').style.display = 'block';
-                document.getElementById('aboutView').style.display = 'none';
-            } else {
-                document.getElementById('authView').style.display = 'block';
-                document.getElementById('homeView').style.display = 'none';
-                document.getElementById('aboutView').style.display = 'none';
             }
         }
 
@@ -431,37 +388,43 @@
                 return;
             }
 
-            let users = JSON.parse(localStorage.getItem('itel_users') || '{}');
+            try {
+                let users = JSON.parse(localStorage.getItem('itel_users') || '{}');
 
-            if (isSignupMode) {
-                if (users[user]) {
-                    errorEl.textContent = 'Username already exists';
-                    errorEl.style.display = 'block';
-                    return;
-                }
-                users[user] = pass;
-                localStorage.setItem('itel_users', JSON.stringify(users));
-                localStorage.setItem('itel_current_user', user);
-                checkAuth();
-            } else {
-                if (users[user] && users[user] === pass) {
+                if (isSignupMode) {
+                    if (users[user]) {
+                        errorEl.textContent = 'Username already exists';
+                        errorEl.style.display = 'block';
+                        return;
+                    }
+                    users[user] = pass;
+                    localStorage.setItem('itel_users', JSON.stringify(users));
                     localStorage.setItem('itel_current_user', user);
                     checkAuth();
                 } else {
-                    errorEl.textContent = 'Invalid username or password';
-                    errorEl.style.display = 'block';
+                    if (users[user] && users[user] === pass) {
+                        localStorage.setItem('itel_current_user', user);
+                        checkAuth();
+                    } else {
+                        errorEl.textContent = 'Invalid username or password';
+                        errorEl.style.display = 'block';
+                    }
                 }
+            } catch (e) {
+                errorEl.textContent = 'Storage error';
+                errorEl.style.display = 'block';
             }
         }
 
         function logout() {
-            localStorage.removeItem('itel_current_user');
+            try {
+                localStorage.removeItem('itel_current_user');
+            } catch (e) {}
             document.getElementById('authUsername').value = '';
             document.getElementById('authPassword').value = '';
             checkAuth();
         }
 
-        // View Switchers
         function showAbout() {
             document.getElementById('homeView').style.display = 'none';
             document.getElementById('aboutView').style.display = 'block';
@@ -472,7 +435,6 @@
             document.getElementById('homeView').style.display = 'block';
         }
 
-        // Run session check on load
         checkAuth();
     </script>
 </body>

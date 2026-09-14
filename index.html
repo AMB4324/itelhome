@@ -234,8 +234,10 @@
             <div id="date">Loading...</div>
         </div>
 
-        <!-- Native Google Search Form -->
+        <!-- Google Search Form using your working client parameters -->
         <form class="search-box" action="https://www.google.com/search" method="GET">
+            <input type="hidden" name="client" value="ms-opera-mini">
+            <input type="hidden" name="gws_rd" value="ssl">
             <div class="search-pill">
                 <select id="engineSelect" disabled style="opacity: 0.8;">
                     <option value="google">Google</option>

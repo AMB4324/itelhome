@@ -103,7 +103,7 @@
             padding: 3px;
             text-align: center;
         }
-        input[type="text"] {
+        input[type="text"], input[type="password"] {
             width: 72%;
             background: transparent;
             color: #1f2937;
@@ -113,7 +113,7 @@
             padding: 2px;
             vertical-align: middle;
         }
-        input[type="text"]::placeholder {
+        input::placeholder {
             color: #9ca3af;
         }
         .search-btn {
@@ -196,21 +196,21 @@
             margin-top: 2px;
         }
 
-        /* About Phone View Styles */
-        .about-card {
+        /* About & Auth Views */
+        .panel-card {
             width: 100%;
             background: #ffffff;
             border: 1px solid #d1d5db;
             border-radius: 6px;
-            padding: 4px;
+            padding: 6px;
             text-align: center;
             margin-bottom: 4px;
         }
-        .about-title {
+        .panel-title {
             font-size: 8px;
             font-weight: bold;
             color: #111827;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             text-transform: uppercase;
         }
         .phone-img {
@@ -234,7 +234,7 @@
         .phone-details b {
             color: #1f2937;
         }
-        .back-btn {
+        .action-btn {
             width: 100%;
             background: #3b82f6;
             color: white;
@@ -244,6 +244,31 @@
             font-size: 8px;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 3px;
+        }
+        .auth-input {
+            width: 100%;
+            background: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 4px;
+            font-size: 7px;
+            color: #1f2937;
+            margin-bottom: 4px;
+            outline: none;
+        }
+        .auth-error {
+            font-size: 6px;
+            color: #ef4444;
+            margin-bottom: 3px;
+            display: none;
+        }
+        .auth-switch {
+            font-size: 6px;
+            color: #3b82f6;
+            cursor: pointer;
+            margin-top: 4px;
+            display: block;
         }
     </style>
 </head>
@@ -251,8 +276,25 @@
 
     <div class="container">
         
+        <!-- AUTH VIEW (Login / Signup) -->
+        <div id="authView" style="display: none;">
+            <div class="logo-box">
+                <div class="brand-logo logo-itel"></div>
+                <div class="logo-divider"></div>
+                <div class="brand-logo logo-am"></div>
+            </div>
+            <div class="panel-card">
+                <div class="panel-title" id="authTitle">Login</div>
+                <div class="auth-error" id="authError">Invalid details</div>
+                <input type="text" id="authUsername" class="auth-input" placeholder="Username">
+                <input type="password" id="authPassword" class="auth-input" placeholder="Password">
+                <button onclick="handleAuth()" class="action-btn" id="authSubmitBtn">Login</button>
+                <span class="auth-switch" onclick="toggleAuthMode()" id="authSwitchText">Need an account? Sign up</span>
+            </div>
+        </div>
+
         <!-- HOME VIEW -->
-        <div id="homeView">
+        <div id="homeView" style="display: none;">
             <!-- Top Bar with Settings Button -->
             <div class="top-bar">
                 <button onclick="showAbout()" class="settings-btn">⚙️ Settings</button>
@@ -312,29 +354,30 @@
 
         <!-- ABOUT PHONE VIEW (Hidden by default) -->
         <div id="aboutView" style="display: none;">
-            <!-- Dual Brand Logo Card at the top of About Page -->
             <div class="logo-box">
                 <div class="brand-logo logo-itel"></div>
                 <div class="logo-divider"></div>
                 <div class="brand-logo logo-am"></div>
             </div>
 
-            <div class="about-card">
-                <div class="about-title">About Phone</div>
+            <div class="panel-card">
+                <div class="panel-title">About Phone</div>
                 <img src="IMG_0009.png" class="phone-img" alt="itel Phone">
                 <div class="phone-details">
                     <b>Model:</b> itel Feature Phone<br>
-                    <b>Purchased:</b> Custom/Recent<br>
+                    <b>User:</b> <span id="loggedUserDisplay"></span><br>
                     <b>System:</b> AM iOS Fix Portal<br>
                     <b>Status:</b> Fully Optimized
                 </div>
-                <button onclick="showHome()" class="back-btn">Back</button>
+                <button onclick="showHome()" class="action-btn">Back</button>
+                <button onclick="logout()" class="action-btn" style="background: #ef4444;">Logout</button>
             </div>
         </div>
 
     </div>
 
     <script>
+        // Clock Script
         function updateClock() {
             var now = new Date();
             var hours = now.getHours();
@@ -352,7 +395,73 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // View Switcher Functions
+        // Auth Logic via localStorage
+        let isSignupMode = false;
+
+        function checkAuth() {
+            const currentUser = localStorage.getItem('itel_current_user');
+            if (currentUser) {
+                document.getElementById('loggedUserDisplay').textContent = currentUser;
+                document.getElementById('authView').style.display = 'none';
+                document.getElementById('homeView').style.display = 'block';
+                document.getElementById('aboutView').style.display = 'none';
+            } else {
+                document.getElementById('authView').style.display = 'block';
+                document.getElementById('homeView').style.display = 'none';
+                document.getElementById('aboutView').style.display = 'none';
+            }
+        }
+
+        function toggleAuthMode() {
+            isSignupMode = !isSignupMode;
+            document.getElementById('authTitle').textContent = isSignupMode ? 'Sign Up' : 'Login';
+            document.getElementById('authSubmitBtn').textContent = isSignupMode ? 'Create Account' : 'Login';
+            document.getElementById('authSwitchText').textContent = isSignupMode ? 'Already have an account? Login' : 'Need an account? Sign up';
+            document.getElementById('authError').style.display = 'none';
+        }
+
+        function handleAuth() {
+            const user = document.getElementById('authUsername').value.trim();
+            const pass = document.getElementById('authPassword').value.trim();
+            const errorEl = document.getElementById('authError');
+
+            if (!user || !pass) {
+                errorEl.textContent = 'Please fill all fields';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('itel_users') || '{}');
+
+            if (isSignupMode) {
+                if (users[user]) {
+                    errorEl.textContent = 'Username already exists';
+                    errorEl.style.display = 'block';
+                    return;
+                }
+                users[user] = pass;
+                localStorage.setItem('itel_users', JSON.stringify(users));
+                localStorage.setItem('itel_current_user', user);
+                checkAuth();
+            } else {
+                if (users[user] && users[user] === pass) {
+                    localStorage.setItem('itel_current_user', user);
+                    checkAuth();
+                } else {
+                    errorEl.textContent = 'Invalid username or password';
+                    errorEl.style.display = 'block';
+                }
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('itel_current_user');
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value = '';
+            checkAuth();
+        }
+
+        // View Switchers
         function showAbout() {
             document.getElementById('homeView').style.display = 'none';
             document.getElementById('aboutView').style.display = 'block';
@@ -362,6 +471,9 @@
             document.getElementById('aboutView').style.display = 'none';
             document.getElementById('homeView').style.display = 'block';
         }
+
+        // Run session check on load
+        checkAuth();
     </script>
 </body>
 </html>

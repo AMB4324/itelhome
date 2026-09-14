@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>itel Home</title>
+    <link rel="icon" type="image/png" href="itel.png">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             background: #f5f7fa;
@@ -18,12 +20,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
         .container {
             width: 100%;
             max-width: 150px;
             text-align: center;
         }
+        /* Top Navigation Bar for Settings Button */
         .top-bar {
             width: 100%;
             text-align: left;
@@ -39,6 +43,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        /* Brand Box - Logos larger than text */
         .logo-box {
             width: 100%;
             background: #ffffff;
@@ -47,12 +52,26 @@
             margin-bottom: 4px;
             border: 1px solid #d1d5db;
         }
-        .brand-text {
-            font-size: 9px;
-            font-weight: bold;
-            color: #2563eb;
-            text-transform: uppercase;
+        .brand-logo {
+            display: inline-block;
+            height: 22px;
+            width: 58px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            vertical-align: middle;
         }
+        .logo-itel { background-image: url('itel.png'); }
+        .logo-am { background-image: url('amiosfix.png'); }
+        .logo-divider {
+            display: inline-block;
+            width: 1px;
+            height: 18px;
+            background-color: #d1d5db;
+            vertical-align: middle;
+            margin: 0 6px;
+        }
+        /* Clock & Date Card */
         .clock-card {
             width: 100%;
             background: #ffffff;
@@ -62,16 +81,17 @@
             border: 1px solid #d1d5db;
         }
         #time {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             color: #111827;
         }
         #date {
-            font-size: 6px;
+            font-size: 7px;
             color: #4b5563;
             text-transform: uppercase;
             font-weight: bold;
         }
+        /* Clean Search Bar */
         .search-box {
             width: 100%;
             margin-bottom: 4px;
@@ -83,14 +103,18 @@
             padding: 3px;
             text-align: center;
         }
-        input[type="text"], input[type="password"] {
-            width: 70%;
+        input[type="text"] {
+            width: 72%;
             background: transparent;
             color: #1f2937;
             border: none;
             font-size: 8px;
             outline: none;
             padding: 2px;
+            vertical-align: middle;
+        }
+        input[type="text"]::placeholder {
+            color: #9ca3af;
         }
         .search-btn {
             background: #3b82f6;
@@ -101,25 +125,43 @@
             font-size: 7px;
             font-weight: bold;
             cursor: pointer;
+            vertical-align: middle;
         }
+        /* 2 Bookmarks Per Row Layout */
         .grid {
             width: 100%;
+            font-size: 0;
             margin-bottom: 4px;
         }
         .card {
-            display: block;
-            width: 100%;
+            display: inline-block;
+            width: 48%;
             background: #ffffff;
             border: 1px solid #d1d5db;
             border-radius: 6px;
-            padding: 5px;
+            padding: 6px 2px;
             text-align: center;
             text-decoration: none;
             color: #374151;
             font-size: 8px;
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
+            vertical-align: top;
         }
+        .card:nth-child(odd) {
+            margin-right: 4%;
+        }
+        .card-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+        /* Footer */
         .footer {
             width: 100%;
             background: #ffffff;
@@ -127,26 +169,57 @@
             border-radius: 6px;
             padding: 4px;
             text-align: center;
+        }
+        .footer-logo-item {
+            display: inline-block;
+            height: 14px;
+            width: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            vertical-align: middle;
+        }
+        .footer-divider {
+            display: inline-block;
+            width: 1px;
+            height: 12px;
+            background-color: #d1d5db;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+        .footer-text {
             font-size: 6px;
             font-weight: bold;
             color: #6b7280;
             text-transform: uppercase;
+            display: block;
+            margin-top: 2px;
         }
-        .panel-card {
+
+        /* About Phone View Styles */
+        .about-card {
             width: 100%;
             background: #ffffff;
             border: 1px solid #d1d5db;
             border-radius: 6px;
-            padding: 6px;
+            padding: 4px;
             text-align: center;
             margin-bottom: 4px;
         }
-        .panel-title {
+        .about-title {
             font-size: 8px;
             font-weight: bold;
             color: #111827;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             text-transform: uppercase;
+        }
+        .phone-img {
+            width: 100%;
+            max-height: 75px;
+            object-fit: contain;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            border: 1px solid #e5e7eb;
         }
         .phone-details {
             font-size: 7px;
@@ -158,7 +231,10 @@
             border-radius: 4px;
             margin-bottom: 4px;
         }
-        .action-btn {
+        .phone-details b {
+            color: #1f2937;
+        }
+        .back-btn {
             width: 100%;
             background: #3b82f6;
             color: white;
@@ -168,30 +244,6 @@
             font-size: 8px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 3px;
-        }
-        .auth-input {
-            width: 100%;
-            background: #f9fafb;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            padding: 4px;
-            font-size: 7px;
-            color: #1f2937;
-            margin-bottom: 4px;
-        }
-        .auth-error {
-            font-size: 6px;
-            color: #ef4444;
-            margin-bottom: 3px;
-            display: none;
-        }
-        .auth-switch {
-            font-size: 6px;
-            color: #3b82f6;
-            cursor: pointer;
-            margin-top: 4px;
-            display: block;
         }
     </style>
 </head>
@@ -199,143 +251,108 @@
 
     <div class="container">
         
-        <!-- AUTH VIEW -->
-        <div id="authView">
-            <div class="logo-box">
-                <div class="brand-text">itel &bull; AM iOS Fix</div>
-            </div>
-            <div class="panel-card">
-                <div class="panel-title" id="authTitle">Login</div>
-                <div class="auth-error" id="authError">Fill all fields</div>
-                <input type="text" id="authUsername" class="auth-input" placeholder="Username">
-                <input type="password" id="authPassword" class="auth-input" placeholder="Password">
-                <button onclick="handleAuth()" class="action-btn" id="authSubmitBtn">Login</button>
-                <span class="auth-switch" onclick="toggleAuthMode()" id="authSwitchText">Create Account</span>
-            </div>
-        </div>
-
         <!-- HOME VIEW -->
-        <div id="homeView" style="display:none;">
+        <div id="homeView">
+            <!-- Top Bar with Settings Button -->
             <div class="top-bar">
                 <button onclick="showAbout()" class="settings-btn">⚙️ Settings</button>
             </div>
 
+            <!-- Dual Brand Logo Card -->
             <div class="logo-box">
-                <div class="brand-text">itel &bull; AM iOS Fix</div>
+                <div class="brand-logo logo-itel"></div>
+                <div class="logo-divider"></div>
+                <div class="brand-logo logo-am"></div>
             </div>
 
+            <!-- Clock & Date Card -->
             <div class="clock-card">
-                <div id="time">00:00 AM</div>
+                <div id="time">Loading...</div>
                 <div id="date">Loading...</div>
             </div>
 
+            <!-- Clean Google Search Form -->
             <form class="search-box" action="https://www.google.com/search" method="GET">
+                <input type="hidden" name="client" value="ms-opera-mini">
+                <input type="hidden" name="gws_rd" value="ssl">
                 <div class="search-pill">
-                    <input type="text" name="q" placeholder="Search Google...">
+                    <input type="text" name="q" id="searchInput" placeholder="Search Google..." autocomplete="off">
                     <button type="submit" class="search-btn">Go</button>
                 </div>
             </form>
 
+            <!-- 2 Bookmarks Per Row Layout -->
             <div class="grid">
-                <a href="https://www.google.com" class="card">Google</a>
-                <a href="https://en.m.wikipedia.org" class="card">Wikipedia</a>
-                <a href="https://github.com" class="card">GitHub</a>
+                <a href="https://www.google.com" class="card">
+                    <div class="card-icon" style="background-image: url('google.png');"></div>
+                    <span>Google</span>
+                </a>
+                <a href="https://en.m.wikipedia.org" class="card">
+                    <div class="card-icon" style="background-image: url('wikipedia.png');"></div>
+                    <span>Wikipedia</span>
+                </a>
+                <a href="https://github.com" class="card">
+                    <div class="card-icon" style="background-image: url('github.png');"></div>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://lite.cnn.com" class="card">
+                    <div class="card-icon" style="background-image: url('news.png');"></div>
+                    <span>Lite News</span>
+                </a>
             </div>
 
-            <div class="footer">AM iOS Fix</div>
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-logo-item logo-itel"></div>
+                <div class="footer-divider"></div>
+                <div class="footer-logo-item logo-am"></div>
+                <span class="footer-text">AM iOS Fix</span>
+            </div>
         </div>
 
-        <!-- ABOUT VIEW -->
-        <div id="aboutView" style="display:none;">
+        <!-- ABOUT PHONE VIEW (Hidden by default) -->
+        <div id="aboutView" style="display: none;">
+            <!-- Dual Brand Logo Card at the top of About Page -->
             <div class="logo-box">
-                <div class="brand-text">itel &bull; AM iOS Fix</div>
+                <div class="brand-logo logo-itel"></div>
+                <div class="logo-divider"></div>
+                <div class="brand-logo logo-am"></div>
             </div>
-            <div class="panel-card">
-                <div class="panel-title">Settings</div>
+
+            <div class="about-card">
+                <div class="about-title">About Phone</div>
+                <img src="IMG_0009.png" class="phone-img" alt="itel Phone">
                 <div class="phone-details">
-                    <b>User:</b> <span id="loggedUserDisplay">Guest</span><br>
-                    <b>Portal:</b> Active
+                    <b>Model:</b> itel Feature Phone<br>
+                    <b>Purchased:</b> Custom/Recent<br>
+                    <b>System:</b> AM iOS Fix Portal<br>
+                    <b>Status:</b> Fully Optimized
                 </div>
-                <button onclick="showHome()" class="action-btn">Back</button>
-                <button onclick="logout()" class="action-btn" style="background: #ef4444;">Logout</button>
+                <button onclick="showHome()" class="back-btn">Back</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Simple clock
         function updateClock() {
-            var d = new Date();
-            var h = d.getHours();
-            var m = d.getMinutes();
-            var ampm = h >= 12 ? 'PM' : 'AM';
-            h = h % 12;
-            h = h ? h : 12;
-            m = m < 10 ? '0' + m : m;
-            document.getElementById('time').textContent = h + ':' + m + ' ' + ampm;
-            
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            var minutesFormatted = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('time').textContent = hours + ':' + minutesFormatted + ' ' + ampm;
+
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            document.getElementById('date').textContent = days[d.getDay()] + ' ' + d.getDate();
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            document.getElementById('date').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
         }
         updateClock();
         setInterval(updateClock, 1000);
 
-        var isSignup = false;
-
-        function checkAuth() {
-            try {
-                var user = localStorage.getItem('itel_user');
-                if (user) {
-                    document.getElementById('loggedUserDisplay').textContent = user;
-                    document.getElementById('authView').style.display = 'none';
-                    document.getElementById('homeView').style.display = 'block';
-                    document.getElementById('aboutView').style.display = 'none';
-                } else {
-                    document.getElementById('authView').style.display = 'block';
-                    document.getElementById('homeView').style.display = 'none';
-                    document.getElementById('aboutView').style.display = 'none';
-                }
-            } catch(e) {
-                // Failsafe if local storage throws security blocks on the device browser
-                document.getElementById('authView').style.display = 'none';
-                document.getElementById('homeView').style.display = 'block';
-            }
-        }
-
-        function toggleAuthMode() {
-            isSignup = !isSignup;
-            document.getElementById('authTitle').textContent = isSignup ? 'Sign Up' : 'Login';
-            document.getElementById('authSubmitBtn').textContent = isSignup ? 'Register' : 'Login';
-            document.getElementById('authSwitchText').textContent = isSignup ? 'Switch to Login' : 'Create Account';
-        }
-
-        function handleAuth() {
-            var u = document.getElementById('authUsername').value;
-            var p = document.getElementById('authPassword').value;
-            var err = document.getElementById('authError');
-
-            if (!u || !p) {
-                err.style.display = 'block';
-                return;
-            }
-
-            try {
-                localStorage.setItem('itel_user', u);
-                checkAuth();
-            } catch(e) {
-                err.textContent = 'Storage blocked';
-                err.style.display = 'block';
-            }
-        }
-
-        function logout() {
-            try {
-                localStorage.removeItem('itel_user');
-            } catch(e) {}
-            checkAuth();
-        }
-
+        // View Switcher Functions
         function showAbout() {
             document.getElementById('homeView').style.display = 'none';
             document.getElementById('aboutView').style.display = 'block';
@@ -345,9 +362,6 @@
             document.getElementById('aboutView').style.display = 'none';
             document.getElementById('homeView').style.display = 'block';
         }
-
-        // Run immediately
-        checkAuth();
     </script>
 </body>
 </html>
